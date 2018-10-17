@@ -21,39 +21,41 @@ module.exports = function(app) {
       //Loading HTML into cheerios
       var $ = cheerio.load(response.data);
       
-      var gameNews = {};
       $("div.media-body").each(function(i, element) {
-        var results = {};
-        results.title = $(this)
+        var gameNews = {};
+        // var results = {};
+
+        gameNews.title = $(this)
           .children("h3.media-title")
           .text();
-        results.summary = $(this)
+        gameNews.summary = $(this)
           .children("p")
           .text();
-        results.url = $(this)
+        gameNews.url = $(this)
           .parent()
           .attr("href");
-        results.image = $(this)
+        gameNews.image = $(this)
           .parent()
           .find("img")
           .attr("src");
-        gameNews[i] = results;
-        if (results.summary === "") {
-          results.summary = "No Summary Available";
+        // gameNews[i] = results;
+
+        if (gameNews.summary === "") {
+          gameNews.summary = "No Summary Available";
         }
-        db.News.create(results)
-        .then(function(gamerNews){
-          console.log(gamerNews);
+        db.News.create(gameNews)
+        .then(function(dbNews){
+          console.log(dbNews);
         })
         .catch(function(err){
           return res.json(err)
         })
       });
-      console.log("Articles: " + gameNews);
-      var articles = {
-        data: gameNews
-      };
-      res.render("index", articles);
+      // console.log("Articles: " + gameNews);
+      // var articles = {
+      //   data: gameNews
+      // };
+      res.send("Scrape Complete!");
     });
   });
  
@@ -62,7 +64,7 @@ module.exports = function(app) {
   app.get("/news", function(req, res) {
     db.News.find({})
       .then(function(results) {
-        res.json(results);
+        res.render("index", {data: results});
       })
       .catch(function(err) {
         res.json(err);
@@ -87,7 +89,7 @@ module.exports = function(app) {
       .then(function(results) {
         return db.News.findOneAndUpdate(
           { _id: req.params.id },
-          { comment: results._id },
+         {$push:  { comment: results._id }},
           { new: true }
         );
       })

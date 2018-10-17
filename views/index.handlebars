@@ -7,7 +7,7 @@
 <br>
 <div class="ui grid">
     <div class="column">
-        <div id="allCards" class="ui stacking three cards">
+        <div id="allCards" class="ui stackable three cards">
             {{#each data}}
             <div class="ui card">
                 <div id="color" class="ui slide masked reveal image">
@@ -28,44 +28,54 @@
                 </div>
 
                 <div class="extra content">
-                    <button id="commentButton"  class=" ui button">Comment</button>
-                    <button id="showComments" class="ui button">Show Comments</button>
+                    <button id="commentButton" data-id={{this._id}} class=" ui button">Comment</button>
+                    <button id="showComments" data-id={{this._id}} class="ui button">Show Comments</button>
                 </div>
             </div>
             {{/each}}
         </div>
     </div>
+</div>
 
-    <!--Modal for comment form -->
-    <div class="ui modal" id="modal1">
-        <div class="header">Please Leave a Comment</div>
-        <div class="content">
-            <div class="form2">
-                <form class="ui form">
-                    <div class="field">
-                        <label>Name</label>
-                        <input id="name" type="text" name="Name" placeholder="Name">
-                    </div>
-                    <div class="field">
-                        <label>Short Text</label>
-                        <textarea id="text" rows="5"></textarea>
-                    </div>
-                    <button id="commentSubmit" class="ui button" type="submit">Submit Comment</button>
-                </form>
-            </div>
-        </div>
-        <!--Modal to show comments -->
-        <div class="ui modal" id="modal2">
-            <div class="header">Comments</div>
-            <div class="content">
-                <div class="form2">
-                    <>This is where a comment will go</p>
+<!--Modal for comment form -->
+{{#each data}}
+<div class="ui modal" id="modal1">
+    <div class="header">Please Leave a Comment</div>
+    <div class="content">
+        <div class="form2">
+            <form class="ui form">
+                <div class="field">
+                    <label>Name</label>
+                    <input id="name" type="text" name="Name" placeholder="Name">
                 </div>
-            </div>
+                <div class="field">
+                    <label>Short Text</label>
+                    <textarea id="text" rows="5"></textarea>
+                </div>
 
+                <button id="commentSubmit" data-id={{this._id}} class="ui button" type="submit">Submit Comment</button>
 
-
-
-
+            </form>
         </div>
     </div>
+</div>
+{{/each}}
+<!--Modal to show comments -->
+{{#each data}}
+<div class="ui modal" id="modal2">
+    <div class="header">Comments</div>
+    <div class="content">
+        <div class="form2">
+            <p>This is where a comment will go</p>
+            
+            <p>{{this._id}}</p>
+            
+        </div>
+    </div>
+</div>
+{{/each}}
+
+
+
+</div>
+</div>
