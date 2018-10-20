@@ -1,25 +1,25 @@
 $(document).ready(function() {
-Enter Button
+//Enter Button
 $(".enterButton").on("click", function(event){
   window.location.href= "/news";
 })  
-Scrape Button
-  $("#scrapeButton").on("click", function(event){
-     console.log("click");
+// //Scrape Button
+//   $("#scrapeButton").on("click", function(event){
+//      console.log("click");
 
-     $.ajax({
-       method:"GET",
-       url:"/scrape"
-     });
-     window.location.href("/news");
-  });
+//      $.ajax({
+//        method:"GET",
+//        url:"/scrape"
+//      });
+//      window.location.href("/news");
+//   });
 
 
 
   //Saved Articles
   $("#news").on("click", function(event){
     console.log("click");
-
+   
     $.ajax({
       method:"GET",
       url:"/savedNews"
@@ -45,6 +45,7 @@ Scrape Button
     event.preventDefault();
     var commentId = $(this).attr("data-id");
     console.log(commentId)
+    
     $("#" + commentId).modal("show");
     console.log("click")
    
@@ -58,7 +59,8 @@ Scrape Button
   //Submit Button
  $(".submitComment").on("click",function(event){
    var commentId = $(this).attr("data-id");
-  
+  event.preventDefault();
+  event.stopImmediatePropagation();
     console.log(commentId)
    $.ajax({
      method: "POST",
@@ -87,8 +89,8 @@ Scrape Button
     });
   });
 
-  //Unsave article from saved
-  $(".unsaveArticle").on("click", function (event) {
+  //Unsave news from saved
+  $(".unsaveNews").on("click", function (event) {
     console.log("delete article button is working");
     var deleteArticle = $(this).attr("data-id");
     $.ajax({

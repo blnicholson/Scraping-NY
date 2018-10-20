@@ -1,10 +1,29 @@
-<div class="ui huge message ">
-  <h1 class="ui huge centered aligned header">Video Game News</h1>
-  <button class= "ui red basic button">Home</button>
-  <button class="ui red basic button" id="scrapeButton">Scrape</button>
-  <button class="ui red basic button">Saved Articles</button>
+{{>header}}
+<body id="newsBody">
 
-</div>
+<div class="ui huge message" id="header">
+    <h1 class="ui huge centered aligned header" id=headerTwo>Video Game News</h1>
+
+<div class="ui animated button" id="home" tabindex="0">
+      <a href = "/">
+      <div class="visible content">Home</div>
+      <div class="hidden content">
+        <i class="home icon"></i>
+      </div>
+      </a>
+    </div>
+
+    <div class="ui animated button"  tabindex="0">
+      <a href="/news">
+        <div class="visible content">Back to Game News</div>
+        <div class="hidden content">
+          <i class="sign in alternate icon"></i>
+        </div>
+      </a>
+    </div>
+
+
+  </div>
 <br>
 <br>
 {{#each savedNews}}
@@ -14,16 +33,18 @@
       <img src="{{this.image}}">
     </div>
     <div class="content">
-      <a class="header" href="https://www.gamespot.com{{this.url}}" </a>{{this.title}} </a> <div class="meta">
+      <a class="header" id="titleText" href="https://www.gamespot.com{{this.url}}" </a>{{this.title}} </a> <div class="meta">
     </div>
-    <div class="description">
+    <div class="description"id="summaryText">
       <p>{{this.summary}}</p>
-      <button class="ui red basic button commentButton" data-id={{this._id}}>Leave a Comment</button>
-      <button class="ui red basic button viewComment" data-id={{this.id}}>View Comment</button>
-      <button class="ui red basic button unsaveArticle" data-id={{this.id}}>Unsave Article</button>
+      <button class="ui inverted button commentButton" data-id={{this._id}}>Leave a Comment</button>
+      <button class="ui inverted button viewComment" data-id={{this.id}}>View Comment</button>
+      <button class="ui inverted button unsaveArticle" data-id={{this.id}}>Unsave Article</button>
     </div>
   </div>
 </div>
+<br>
+<br>
 {{/each}}
 </div>
 
@@ -42,20 +63,20 @@
           <label>Short Text</label>
           <textarea id="text_{{this._id}}" rows="5"></textarea>
         </div>
-        <button data-id={{this._id}} class="submitComment ui button" type="submit">Submit Comment</button>
+        <input type="submit" data-id={{this._id}} class="submitComment ui button" type="submit">
 
       </form>
     </div>
   </div>
-{{/each}}
 </div>
+{{/each}}
 
 {{!-- Modal to show comments --}}
 <div class="ui modal modal2">
   <div class="header">Comments</div>
   <div class="content">
     <div class="comments">
-      <p>{{this.id}}</p>
+     <p>content will go here</p>
     </div>
   </div>
 </div>
