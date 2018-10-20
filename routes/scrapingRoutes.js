@@ -6,10 +6,10 @@ var axios = require("axios");
 var db = require("../models");
 
 //Connecting to MongoDB
-mongoose.connect(
-  "mongodb://localhost/scrapeNewsdb",
-  { useNewUrlParser: true }
-);
+var PORT = process.env.PORT || 8080;
+var MONGODB_URI = process.env.PORT.MONGODB_URI || "mongodb://localhost/scrapedNewsdb";
+mongoose.connect(MONGODB_URI);
+  
 module.exports = function(app) {
   //Route for index
   app.get("/", function(req, res) {

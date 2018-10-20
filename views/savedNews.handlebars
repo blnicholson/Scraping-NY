@@ -64,7 +64,6 @@
           <textarea id="text_{{this._id}}" rows="5"></textarea>
         </div>
         <input type="submit" data-id={{this._id}} class="submitComment ui button" type="submit">
-
       </form>
     </div>
   </div>
@@ -72,11 +71,20 @@
 {{/each}}
 
 {{!-- Modal to show comments --}}
-<div class="ui modal modal2">
-  <div class="header">Comments</div>
+
+{{#each savedNews}}
+<div class="ui modal modal2"data-id={{this.tit}}>
+  <div class="header">{{this.title}}</div>
   <div class="content">
+    {{#if this.comment}}
+    {{#each this.comment}}
     <div class="comments">
-     <p>content will go here</p>
+     <p>{{this.body}}</p>
     </div>
+    {{/each}}
+    {{else}}
+      <h3>No Notes Yet!</h3>
+    {{/if}}
   </div>
 </div>
+{{/each}}
