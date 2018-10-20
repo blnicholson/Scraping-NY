@@ -7,14 +7,6 @@ var Schema = mongoose.Schema;
 //Create CommentsSchema Object (similar to Sequelize)
 var CommentsSchema = new Schema({
   //Username
-  name: {
-    type: String,
-    required: true
-  },
-  // title: {
-  //   type: String,
-  //   required: true
-  //},
   body: {
     type: String,
     required: true

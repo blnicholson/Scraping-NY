@@ -1,19 +1,19 @@
 {{>header}}
+
 <body id="newsBody">
 
-<div class="ui huge message" id="header">
+  <div class="ui huge message" id="header">
     <h1 class="ui huge centered aligned header" id=headerTwo>Video Game News</h1>
-
-<div class="ui animated button" id="home" tabindex="0">
-      <a href = "/">
-      <div class="visible content">Home</div>
-      <div class="hidden content">
-        <i class="home icon"></i>
-      </div>
+    <div class="ui animated button" id="home" tabindex="0">
+      <a href="/">
+        <div class="visible content">Home</div>
+        <div class="hidden content">
+          <i class="home icon"></i>
+        </div>
       </a>
     </div>
 
-    <div class="ui animated button"  tabindex="0">
+    <div class="ui animated button" tabindex="0">
       <a href="/news">
         <div class="visible content">Back to Game News</div>
         <div class="hidden content">
@@ -21,70 +21,76 @@
         </div>
       </a>
     </div>
-
-
   </div>
-<br>
-<br>
-{{#each savedNews}}
-<div class="ui items">
-  <div class="item">
-    <div class="image">
-      <img src="{{this.image}}">
+  <br>
+  <br>
+  {{#each savedNews}}
+  <div class="ui items">
+    <div class="item">
+      <div class="image">
+        <img src="{{this.image}}">
+      </div>
+      <div class="content">
+        <a class="header" id="titleText" href="https://www.gamespot.com{{this.url}}" </a>{{this.title}} </a> <div class="meta">
+      </div>
+      <div class="description" id="summaryText">
+        <p>{{this.summary}}</p>
+        <button class="ui inverted button commentButton" data-id={{this._id}}>Leave a Comment</button>
+        <button class="ui inverted button unsaveNews" data-id={{this.id}}>Unsave News</button>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  {{/each}}
+  </div>
+
+  <!--Modal for Comment Form-->
+
+  {{#each savedNews}}
+  <div class="ui modal modal1" id={{this.id}}>
+    <div class="header">
+       {{this.title}}
     </div>
     <div class="content">
-      <a class="header" id="titleText" href="https://www.gamespot.com{{this.url}}" </a>{{this.title}} </a> <div class="meta">
+      <div class="description">
+        <form class = "ui form">
+          <div class="field">
+            <label>Create New Comment</label>
+            <textarea id="text_{{this.id}}""text" data-id></textarea>
+          </div>
+          <button class = "ui button submitComment" data-id={{this.id}} type="submit">
+            Submit Comment
+          </button>
+        </form>
+      </div>
+      
     </div>
-    <div class="description"id="summaryText">
-      <p>{{this.summary}}</p>
-      <button class="ui inverted button commentButton" data-id={{this._id}}>Leave a Comment</button>
-      <button class="ui inverted button viewComment" data-id={{this.id}}>View Comment</button>
-      <button class="ui inverted button unsaveArticle" data-id={{this.id}}>Unsave Article</button>
-    </div>
-  </div>
-</div>
-<br>
-<br>
-{{/each}}
-</div>
-
-<!--Modal for Comment Form-->
-{{#each savedNews}}
-<div class="ui modal modal1" id={{_id}}>
-  <div class="header">Please Leave a Comment</div>
-  <div class="content">
-    <div class="form2">
-      <form class="ui form">
-        <div class="field">
-          <label>Name</label>
-          <input id="name_{{this._id}}" type="text" name="Name" placeholder="Name">
-        </div>
-        <div class="field">
-          <label>Short Text</label>
-          <textarea id="text_{{this._id}}" rows="5"></textarea>
-        </div>
-        <input type="submit" data-id={{this._id}} class="submitComment ui button" type="submit">
-      </form>
+    <div class="ui header">Comments</div>
+    <div class="header">
+      <div>
+        <ul>
+        <li>{{this.comment}}</li>
+        </ul>
+        
+        
+      </div>
     </div>
   </div>
-</div>
-{{/each}}
-
-{{!-- Modal to show comments --}}
-
-{{#each savedNews}}
-<div class="ui modal modal2"data-id={{this.tit}}>
-  <div class="header">{{this.title}}</div>
-  <div class="content">
-    {{#if this.comment}}
-    {{#each this.comment}}
-    <div class="comments">
-     <p>{{this.body}}</p>
-    </div>
-    {{/each}}
-    {{else}}
-      <h3>No Notes Yet!</h3>
-    {{/if}}
+        
   </div>
-</div>
-{{/each}}
+  {{/each}}
+
+  {{!-- Modal to show comments
+  {{#each savedNews}}
+  <div class="ui modal modal2">
+    <div class="header">{{this.title}}</div>
+    <div class="content">
+
+      <div class="comments">
+        <p>{{this.body}}</p>
+      </div>
+
+    </div>
+  </div>
+  {{/each}} --}}

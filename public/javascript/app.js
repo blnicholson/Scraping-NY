@@ -1,14 +1,15 @@
 $(document).ready(function() {
+
 //Enter Button
 $(".enterButton").on("click", function(event){
   window.location.href= "/news";
 })  
-// //Scrape Button
+ //Scrape Button
 
 
 
-  //Saved Articles
-  $("#news").on("click", function(event){
+  // View Saved Articles
+  $("#viewSaved").on("click", function(event){
     console.log("click");
    
     $.ajax({
@@ -18,7 +19,7 @@ $(".enterButton").on("click", function(event){
      window.location.href= "/savedNews"
   })
 
-  //Save Articles
+  //Save Articles to the saved articles page
   $(".saveButton").on("click", function(event){
     console.log("click");
     var commentId=$(this).attr("data-id");
@@ -35,11 +36,8 @@ $(".enterButton").on("click", function(event){
   $(".commentButton").on("click", function(event){ 
     event.preventDefault();
     var commentId = $(this).attr("data-id");
-    console.log(commentId)
-    
     $("#" + commentId).modal("show");
-    console.log("click")
-   
+
     $.ajax({
       method: "GET",
       url: "/news/" + commentId
@@ -47,7 +45,7 @@ $(".enterButton").on("click", function(event){
     
   });
 
-  //Submit Button
+  //Submit comment Button
  $(".submitComment").on("click",function(event){
    var commentId = $(this).attr("data-id");
   event.preventDefault();
@@ -57,7 +55,7 @@ $(".enterButton").on("click", function(event){
      method: "POST",
      url: "/news/" + commentId,
      data: {
-     name: $("#name_"+ commentId).val(),
+    
      body: $("#text_" + commentId).val()
    }
   }).then(function(result){
@@ -68,18 +66,19 @@ $(".enterButton").on("click", function(event){
   
   //Show Comments
   $(".viewComment").on("click", function(event){
-  var commentId = $(this).attr("data-id");
-  $(".modal2").modal("show");
-
-    $.ajax({
-      method: "GET",
-      url: "/news/" + commentId
-    }).then(function(result) {
-      console.log(result);
-      
+    console.log("click")
+    $(".modal2").modal("show");
+    var commentId = $(this).attr("data-id");
+  //console.log(commentId)
+      $.ajax({
+        method: "GET",
+        url: "/news/" + commentId
+      }).then(function(result) {
+        
+        
+      });
     });
-  });
-
+  
   //Unsave news from saved
   $(".unsaveNews").on("click", function (event) {
     console.log("delete article button is working");

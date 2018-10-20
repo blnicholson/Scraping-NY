@@ -1,18 +1,14 @@
-
 var cheerio = require("cheerio");
 var axios = require("axios");
 
 //Requiring models
 var db = require("../models");
 
-
 module.exports = function(app) {
   //Route for index
   app.get("/", function(req, res) {
     res.render("index");
   });
-  
-  
 
   //Get route for scraping website
   app.get("/scrape", function(req, res) {
@@ -20,10 +16,9 @@ module.exports = function(app) {
     axios.get("http://www.gamespot.com/").then(function(response) {
       //Loading HTML into cheerios
       var $ = cheerio.load(response.data);
-      
+
       $("div.media-body").each(function(i, element) {
         var gameNews = {};
-        // var results = {};
 
         gameNews.title = $(this)
           .children("h3.media-title")
@@ -38,28 +33,29 @@ module.exports = function(app) {
           .parent()
           .find("img")
           .attr("src");
-       
-
-        if(gameNews.summary === "") {
+        if (gameNews.summary === "") {
           gameNews.summary = "No Summary Available";
         }
         db.News.create(gameNews)
-        .then(function(dbNews){
-          console.log(dbNews);
-        })
-        .catch(function(err){
-          return res.json(err)
-        })
+          .then(function(result) {
+            console.log(result);
+          })
+          .catch(function(err) {
+            
+          });
       });
-      res.redirect("/news")
+      // res.send("Scrape Complete!");
+      res.redirect("/news");
     });
   });
- 
+
   //Route for getting all News from database
   app.get("/news", function(req, res) {
     db.News.find({})
       .then(function(results) {
-        res.render("news", {data: results});
+        res.render("news", {
+          data: results
+        });
       })
       .catch(function(err) {
         res.json(err);
@@ -70,20 +66,21 @@ module.exports = function(app) {
   app.get("/news/:id", function(req, res) {
     console.log(req.params.id);
     db.News.findOne({ _id: req.params.id })
-    .populate("comment")
+      .populate("comment")
       .then(function(results) {
-        console.log(results);
-        res.json(results);
+        
+        res.render("savedNews",{
+          comment: results});
+          console.log(re)
       })
       .catch(function(err) {
-        console.log(err);
-        res.json(err);
+       
       });
   });
 
   //Route for saving and updating a comment
   app.post("/news/:id", function(req, res) {
-    console.log(req.params.id)
+    console.log(req.params.id);
     db.Comments.create(req.body)
       .then(function(results) {
         return db.News.findOneAndUpdate(
@@ -95,64 +92,60 @@ module.exports = function(app) {
       .then(function(results) {
         console.log(results);
         res.json(results);
-      
       })
       .catch(function(err) {
-        console.log(err)
+        console.log(err);
         res.json(err);
       });
   });
 
   //Route to show saved articles
-  app.get("/savedNews", function (req, res) {
-
-    db.News.find(         
-        {
-            saved: true
-        })
-        .then(function (dbArticle) {              
-                
-                res.render("savedNews", {
-                    savedNews: dbArticle
-                })
-            })
-        
-        .catch(function (err) {
-            res.json(err);
-        });
-});
-//Route for saving articles
-app.post("/savedNews/:id", function(req, res) {
-    console.log(req.params.id);
-    db.News.update({_id: req.params.id},{saved: true})
-    .then(function(result) {
-        res.redirect("/savedNews")
+  app.get("/savedNews", function(req, res) {
+    db.News.find({
+      saved: true
     })
-    .catch(function(err) {
+      .then(function(dbArticle) {
+        res.render("savedNews", {
+          savedNews: dbArticle
+        });
+      })
+
+      .catch(function(err) {
         res.json(err);
-    });
-});
-
-//Route for unsaving an article
-app.post("/deleteNews/:id", function (req, res) {
-  
-  db.News.findOneAndUpdate({
-          "_id": req.params.id
-      }, {
-          "saved": false,
-          "notes": []
-      })
-    
-      .then(function (result) {
-          res.json({
-              success: true
-          })
-      })
-      .catch(function (err) {
-          res.json(err);
       });
-});
+  });
+  //Route for saving articles
+  app.post("/savedNews/:id", function(req, res) {
+    console.log(req.params.id);
+    db.News.update({ _id: req.params.id }, { saved: true })
+      .then(function(result) {
+        res.redirect("/savedNews");
+        
+      })
+      .catch(function(err) {
+        res.json(err);
+      });
+  });
 
+  //Route for unsaving an article
+  app.post("/deleteNews/:id", function(req, res) {
+    db.News.findOneAndUpdate(
+      {
+        _id: req.params.id
+      },
+      {
+        saved: false,
+        notes: []
+      }
+    )
 
-  //End of module
-};
+      .then(function(result) {
+        res.json({
+          success: true
+        });
+      })
+      .catch(function(err) {
+        res.json(err);
+      });
+  });
+}; //End of module
