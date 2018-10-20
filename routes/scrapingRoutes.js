@@ -58,7 +58,7 @@ module.exports = function(app) {
         });
       })
       .catch(function(err) {
-        res.json(err);
+        
       });
   });
 
@@ -111,7 +111,7 @@ module.exports = function(app) {
       })
 
       .catch(function(err) {
-        res.json(err);
+       
       });
   });
   //Route for saving articles
@@ -123,7 +123,7 @@ module.exports = function(app) {
         
       })
       .catch(function(err) {
-        res.json(err);
+        
       });
   });
 
