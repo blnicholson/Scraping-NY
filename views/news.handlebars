@@ -1,0 +1,31 @@
+{{>header}}
+<body id = "newsBody">
+
+<div class="ui huge message" id="header">
+    <h1 class="ui huge centered aligned header">Video Game News</h1>
+    <button class = "ui red basic button" id="scrapeButton">Scrape</button>
+    <button class = "ui red basic button" id="news">Saved News</button>
+    
+    
+</div>
+<br>
+<br>
+{{#each data}}
+<div class="ui items">
+  <div class="item">
+    <div class="image">
+      <img src="{{this.image}}">
+    </div>
+    <div class="content">
+      <a class="header" href="https://www.gamespot.com{{this.url}}"</a>{{this.title}}</a>
+      <div class="meta">
+      </div>
+      <div class="description">
+        <p>{{this.summary}}</p>
+          <button class = "ui red basic button saveButton" data-id={{this.id}}>Save Article</button>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>
+      

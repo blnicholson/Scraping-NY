@@ -1,12 +1,11 @@
+#news{
+    background-image:url("../assets/images/background.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment:fixed;
+}
 
-#color{
-    background-color:orange;
-}
-#title{
-    background-color:blue;
-}
-/* #allCards{
-    width:1400px;
-    margin-left: 250px;
+/* #header{
+    background:rgba(128, 128, 128, 0.301);
 } */
-

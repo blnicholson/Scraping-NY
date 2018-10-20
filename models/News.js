@@ -9,20 +9,28 @@ var NewsSchema = new Schema({
   //Username
   title: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   summary: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   url: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   image: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
+  saved:{
+    type: Boolean,
+    default: false
+},
   comment: {
       type:Schema.Types.ObjectId,
       ref: "Comments"

@@ -1,0 +1,61 @@
+<div class="ui huge message ">
+  <h1 class="ui huge centered aligned header">Video Game News</h1>
+  <button class= "ui red basic button">Home</button>
+  <button class="ui red basic button" id="scrapeButton">Scrape</button>
+  <button class="ui red basic button">Saved Articles</button>
+
+</div>
+<br>
+<br>
+{{#each savedNews}}
+<div class="ui items">
+  <div class="item">
+    <div class="image">
+      <img src="{{this.image}}">
+    </div>
+    <div class="content">
+      <a class="header" href="https://www.gamespot.com{{this.url}}" </a>{{this.title}} </a> <div class="meta">
+    </div>
+    <div class="description">
+      <p>{{this.summary}}</p>
+      <button class="ui red basic button commentButton" data-id={{this._id}}>Leave a Comment</button>
+      <button class="ui red basic button viewComment" data-id={{this.id}}>View Comment</button>
+      <button class="ui red basic button unsaveArticle" data-id={{this.id}}>Unsave Article</button>
+    </div>
+  </div>
+</div>
+{{/each}}
+</div>
+
+<!--Modal for Comment Form-->
+{{#each savedNews}}
+<div class="ui modal modal1" id={{_id}}>
+  <div class="header">Please Leave a Comment</div>
+  <div class="content">
+    <div class="form2">
+      <form class="ui form">
+        <div class="field">
+          <label>Name</label>
+          <input id="name_{{this._id}}" type="text" name="Name" placeholder="Name">
+        </div>
+        <div class="field">
+          <label>Short Text</label>
+          <textarea id="text_{{this._id}}" rows="5"></textarea>
+        </div>
+        <button data-id={{this._id}} class="submitComment ui button" type="submit">Submit Comment</button>
+
+      </form>
+    </div>
+  </div>
+{{/each}}
+</div>
+
+{{!-- Modal to show comments --}}
+<div class="ui modal modal2">
+  <div class="header">Comments</div>
+  <div class="content">
+    <div class="comments">
+      <p>{{this.id}}</p>
+    </div>
+  </div>
+</div>
