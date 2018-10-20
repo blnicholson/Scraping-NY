@@ -6,9 +6,8 @@ var axios = require("axios");
 var db = require("../models");
 
 //Connecting to MongoDB
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scrapeNewsdb"
-mongoose.connect(MONGODB_URI);
-  
+mongoose.connect(
+  "mongodb://localhost/scrapeNewsdb",
   { useNewUrlParser: true }
 );
 module.exports = function(app) {
