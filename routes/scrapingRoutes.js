@@ -1,15 +1,11 @@
-var mongoose = require("mongoose");
+
 var cheerio = require("cheerio");
 var axios = require("axios");
 
 //Requiring models
 var db = require("../models");
 
-//Connecting to MongoDB
-var PORT = process.env.PORT || 8080;
-var MONGODB_URI = process.env.PORT.MONGODB_URI || "mongodb://localhost/scrapedNewsdb";
-mongoose.connect(MONGODB_URI);
-  
+
 module.exports = function(app) {
   //Route for index
   app.get("/", function(req, res) {

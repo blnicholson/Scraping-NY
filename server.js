@@ -2,6 +2,7 @@
 var express = require("express");
 var exphbs = require("express-handlebars");
 var logger = require("morgan");
+var mongoose = require("mongoose");
 var PORT = process.env.PORT || 8080;
 
 //Initializing Express
@@ -20,6 +21,12 @@ app.set("view engine", "handlebars");
 app.use(logger("dev"));
 //Routes
 require("./routes/scrapingRoutes.js")(app)
+
+//Connecting to MongoDB
+var PORT = process.env.PORT || 8080;
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scrapedNewsdb";
+mongoose.connect(MONGODB_URI);
+  
 
 //Starting Server
 app.listen(PORT, function () {
