@@ -4,15 +4,15 @@ $(document).ready(function() {
 //   window.location.href= "/news";
 // })  
 //Scrape Button
-  $("#scrapeButton").on("click", function(event){
-     console.log("click");
+  // $("#scrapeButton").on("click", function(event){
+  //    console.log("click");
 
-     $.ajax({
-       method:"GET",
-       url:"/scrape/"
-     })
-     window.location.href="/news";
-  })
+  //    $.ajax({
+  //      method:"GET",
+  //      url:"/scrape"
+  //    });
+  //    window.location.reload();
+  // });
 
 
 

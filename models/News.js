@@ -9,23 +9,26 @@ var NewsSchema = new Schema({
   //Username
   title: {
     type: String,
-    required: true,
-    unique: true
+    required: true
+    
   },
   summary: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    
   },
   url: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    
   },
   image: {
     type: String,
     required: true,
-    unique: true
+    unique:true
+    
   },
   saved:{
     type: Boolean,

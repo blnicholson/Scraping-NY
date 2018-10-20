@@ -55,7 +55,7 @@ module.exports = function(app) {
           return res.json(err)
         })
       });
-       res.redirect("/news")
+      res.redirect("/news")
     });
   });
  
