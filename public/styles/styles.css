@@ -6,6 +6,9 @@
     background-attachment:fixed;
 }
 
-/* #header{
-    background:rgba(128, 128, 128, 0.301);
-} */
+#header{
+    background-color: rgba(119, 136, 153, 0.575);
+}
+#headerTwo{
+    color:whitesmoke;
+}

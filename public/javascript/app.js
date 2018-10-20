@@ -1,18 +1,18 @@
 $(document).ready(function() {
-//Enter Button
-// $(".enterButton").on("click", function(event){
-//   window.location.href= "/news";
-// })  
-//Scrape Button
-  // $("#scrapeButton").on("click", function(event){
-  //    console.log("click");
+Enter Button
+$(".enterButton").on("click", function(event){
+  window.location.href= "/news";
+})  
+Scrape Button
+  $("#scrapeButton").on("click", function(event){
+     console.log("click");
 
-  //    $.ajax({
-  //      method:"GET",
-  //      url:"/scrape"
-  //    });
-  //    window.location.reload();
-  // });
+     $.ajax({
+       method:"GET",
+       url:"/scrape"
+     });
+     window.location.href("/news");
+  });
 
 
 
