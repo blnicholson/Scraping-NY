@@ -21,12 +21,12 @@ app.set("view engine", "handlebars");
 app.use(logger("dev"));
 //Routes
 require("./routes/scrapingRoutes.js")(app)
-
-//Connecting to MongoDB
-
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scrapedNewsdb";
 mongoose.connect(MONGODB_URI);
   
+
+//Connecting to MongoDB
+
 
 //Starting Server
 app.listen(PORT, function () {
