@@ -43,6 +43,7 @@ module.exports = function(app) {
           .catch(function(err) {
             
           });
+          
       });
       // res.send("Scrape Complete!");
       res.redirect("/news");
@@ -58,7 +59,7 @@ module.exports = function(app) {
         });
       })
       .catch(function(err) {
-       
+       console.log(err)
       });
   });
 
@@ -71,10 +72,10 @@ module.exports = function(app) {
         
         res.render("savedNews",{
           comment: results});
-          console.log(re)
+          console.log(results)
       })
       .catch(function(err) {
-         
+         console.log(err)
       });
   });
 
@@ -111,7 +112,7 @@ module.exports = function(app) {
       })
 
       .catch(function(err) {
-         
+         console.log(err)
       });
   });
   //Route for saving articles
@@ -123,7 +124,7 @@ module.exports = function(app) {
         
       })
       .catch(function(err) {
-        
+        console.log(err)
       });
   });
 
