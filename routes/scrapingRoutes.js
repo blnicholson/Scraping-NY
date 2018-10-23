@@ -41,13 +41,16 @@ module.exports = function(app) {
             console.log(result);
           })
           .catch(function(err) {
-            
+            console.log(err)
           });
           
       });
       // res.send("Scrape Complete!");
       res.redirect("/news");
-    });
+    })
+    .catch(function(err){
+      console.log(err)
+    })
   });
 
   //Route for getting all News from database
