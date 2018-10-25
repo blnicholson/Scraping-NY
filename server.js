@@ -26,7 +26,7 @@ require("./routes/scrapingRoutes.js")(app)
 console.log( "mongo" + process.env.MONGODB_URI);
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scrapedNewsdb";
 mongoose.connect(MONGODB_URI);
-  
+
 
 
 
